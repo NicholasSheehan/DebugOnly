@@ -1,15 +1,16 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 [InitializeOnLoad]
 public class DebugOnlyEditor : Editor
 {
     /// <summary>
-    /// Sets the debug tag
+    /// Adds the DebugOnly tag to the tag manager
     /// </summary>
     static DebugOnlyEditor()
     {
-        //there is no type to cast to, so we just get all tag manager assets, in which there is only one, and load it as a serializedObject
-        var tagManagerAssetObject = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0];
+        //Loads the TagManager asset
+        var tagManagerAssetObject = AssetDatabase.LoadAssetAtPath<Object>("ProjectSettings/TagManager.asset");
         var tagManagerAsset = new SerializedObject(tagManagerAssetObject);
         var tagsProperty = tagManagerAsset.FindProperty("tags");
 
@@ -28,12 +29,14 @@ public class DebugOnlyEditor : Editor
         //if the tag was found, then we don't need to add it
         if (foundDebugTag) return;
 
-        //insert entry into tag list, and then set the tag value, then save
+        //Insert entry into tag array
         tagsProperty.InsertArrayElementAtIndex(0);
-
         var newTagIndex = tagsProperty.GetArrayElementAtIndex(0);
+
+        //Set the tag value
         newTagIndex.stringValue = DebugOnlyProcessor.debugOnlyTag;
 
+        //Save
         tagManagerAsset.ApplyModifiedProperties();
     }
 }

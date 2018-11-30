@@ -10,19 +10,30 @@ public class DebugOnlyProcessor : IProcessSceneWithReport
 public class DebugOnlyProcessor : IProcessScene
 #endif
 {
+    /// <summary>
+    /// Debug Only Tag
+    /// </summary>
     public const string debugOnlyTag = "DebugOnly";
 
-    public int callbackOrder { get; private set; }
+    /// <summary>
+    /// Order in which the OnProcessScene methods should be run
+    /// </summary>
+    public int callbackOrder {
+        get { return 0; }
+    }
 
+    /// <summary>
+    /// Called when a scene is being processed
+    /// </summary>
+    /// <param name="scene">Scene being processed</param>
 #if UNITY_2018_1_OR_NEWER
+    /// <param name="report">Build Report</param>
     public void OnProcessScene(Scene scene, UnityEditor.Build.Reporting.BuildReport report)
 #else
     public void OnProcessScene(Scene scene)
 #endif
     {
-#if DEBUG
-        return;
-#endif
+#if !DEBUG //Release
         var sceneRootObjects = scene.GetRootGameObjects();
 
         foreach (var rootObject in sceneRootObjects)
@@ -34,5 +45,6 @@ public class DebugOnlyProcessor : IProcessScene
                 if (child.CompareTag(debugOnlyTag)) Object.DestroyImmediate(child.gameObject);
             }
         }
+#endif //End Release
     }
 }
