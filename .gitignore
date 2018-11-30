@@ -1,0 +1,17 @@
+### Unity ###
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+
+/.vs/
+*.csproj
+*.unityproj
+*.sln
+*.buildreport
+Assets/BuildReports/
+
+Assets/Standard Assets/
+
+Assets/Standard Assets\.meta
