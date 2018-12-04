@@ -9,11 +9,17 @@ Included is a very simple demo, one scene with 3 different colored cubes.
 - A green cube tagged with "DebugOnly"
 - A blue cube left untagged
 
+## Installation
+1. Copy the DebugOnly folder into the "Assets" folder
+2. Profit
+
+## Testing
 To test:
 1. Run the scene in the Editor, all 3 cubes should be visible
 2. Build and run the scene with development mode turned off, only the blue cube will be visible.
 3. Build and run the scene with development mode turned ON, both the green and blue cube will be visible.
 
-More in depth and screenshots coming soon!
-
-Also CI builds!
+## Coming Soon
+- More in depth and screenshots coming soon!
+- CI builds
+- Submodule
