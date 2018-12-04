@@ -1,8 +1,6 @@
 # DebugOnly
 
-Works exactly the same as the "EditorOnly" tag in Unity
-
-Explained here very simpily by [@John_O_Really](https://twitter.com/John_O_Really/status/1069984103074807808)
+Works exactly the same as the "EditorOnly" tag in Unity explained here very simpily by [@John_O_Really](https://twitter.com/John_O_Really/status/1069984103074807808)
 
 Objects tagged with "DebugOnly" will be left out in release builds, but will remain in debug builds. Good for having extra objects whilst debugging a build.
 
