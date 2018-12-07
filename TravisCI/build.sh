@@ -2,11 +2,13 @@
 
 UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
 
-echo "Unity path: ${UNITY_PATH}"
-
 activateLicense() {
+	echo ""
+	echo ""
     echo "Activate Unity"
-
+	echo ""
+	echo ""
+	
     ${UNITY_PATH} \
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
@@ -17,8 +19,11 @@ activateLicense() {
 }
 
 buildPackage() {
+	echo ""
+	echo ""
 	echo "Project Path: ${TRAVIS_BUILD_DIR}"
-	ls "${TRAVIS_BUILD_DIR}"
+	echo ""
+	echo ""
 	
 	${UNITY_PATH} \
          -batchmode \
@@ -29,17 +34,23 @@ buildPackage() {
          -executeMethod DebugOnlyPackageBuilder.Build \
          -quit
 
-     rc1=$?
-     echo "Build logs (Package)"
-     cat "${TRAVIS_BUILD_DIR}/unity.build.package.log"
-
-     # exit if build failed
-     if [ $rc1 -ne 0 ]; then { echo "Build failed"; exit $rc1; } fi
+    rc1=$?
+	 
+	echo ""
+	echo ""
+    echo "Build logs (Package)"
+    cat "${TRAVIS_BUILD_DIR}/unity.build.package.log"
+    # exit if build failed
+    if [ $rc1 -ne 0 ]; then { echo "Build failed"; exit $rc1; } fi
 }
 
 returnLicense() {
+	echo ""
+	echo ""
     echo "Return license"
-
+	echo ""
+	echo ""
+	
     ${UNITY_PATH} \
         -batchmode \
         -returnlicense \
@@ -49,8 +60,5 @@ returnLicense() {
 activateLicense
 buildPackage
 returnLicense
-
-echo "${TRAVIS_BUILD_DIR} Contents:"
-ls "${TRAVIS_BUILD_DIR}"
 
 exit 0
