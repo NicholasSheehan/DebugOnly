@@ -82,14 +82,14 @@ returnLicense() {
     cat "$(pwd)/unity.returnlicense.log"
 }
 
+echo "${TRAVIS_BUILD_DIR} Contents:"
+ls "${TRAVIS_BUILD_DIR}"
+
 activateLicense
 #prepareBuilds
 #buildiOS
 buildPackage
 returnLicense
-
-echo "${TRAVIS_BUILD_DIR} Contents:"
-ls "${TRAVIS_BUILD_DIR}"
 
 echo ""
 echo "${TRAVIS_BUILD_DIR}/Assets Contents:"
