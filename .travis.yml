@@ -1,0 +1,50 @@
+#Set language to Obj-C so that Travis runs on OSX, so that builds for Apple devices will run
+language: objective-c
+
+os: osx
+osx_image: xcode10
+
+#Ruby version
+rvm:
+- 2.2
+
+cache:
+  directories:
+  - unity_download_cache
+
+#Called before the install phase
+#Mark the scripts executable
+before_install:
+- chmod -R a+rw ./unity_download_cache
+- chmod a+x ./TravisCI/install.sh
+- chmod a+x ./TravisCI/build.sh
+
+#Install Unity
+install:
+- ./TravisCI/install.sh
+
+#Run the build script
+script:
+- ./TravisCI/build.sh
+
+# before_deploy:
+      # # Set up git user name and tag this commit
+      # - git config --local user.name "Nicholas Sheehan"
+      # - git config --local user.email "NicholasSheehan@live.co.uk"
+      # - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+      # - git tag $TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key: "${GITHUB_OAUTH_TOKEN}"
+  file: "${BUILD_PATH}/package.unitypackage"
+  skip_cleanup: true
+  on:
+    tags: true
+
+
+env:
+  global:
+  - UNITY_NOPROXY="localhost,127.0.0.1"
+  - UNITY_DOWNLOAD_CACHE="${TRAVIS_BUILD_DIR}/unity_download_cache"
+  - UNITY_PROJECT_NAME="UnityProject"
+  - BUILD_PATH="${TRAVIS_BUILD_DIR}"
