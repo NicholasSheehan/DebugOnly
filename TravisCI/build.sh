@@ -1,7 +1,6 @@
 #! /bin/sh
 
 UNITY_PATH="/Applications/Unity/Unity.app/Contents/MacOS/Unity"
-UNITY_PROJECT_NAME="DebugOnly"
 
 echo "Unity path: ${UNITY_PATH}"
 
@@ -20,12 +19,12 @@ activateLicense() {
     cat "${TRAVIS_BUILD_DIR}/unity.activation.log"
 }
 
-# prepareBuilds() {
-    # echo "Preparing building"
+ # prepareBuilds() {
+     # echo "Preparing building"
 
-    # mkdir ${BUILD_PATH}
-    # echo "Created directory: ${BUILD_PATH}"
-# }
+     # mkdir ${BUILD_PATH}
+     # echo "Created directory: ${BUILD_PATH}"
+ # }
 
 # buildiOS() {
     # echo "Building ${UNITY_PROJECT_NAME} for iOS"
@@ -48,10 +47,10 @@ activateLicense() {
 # }
 
 buildPackage() {
-    echo "Building ${UNITY_PROJECT_NAME} package"
+    echo "Building ${TRAVIS_BUILD_DIR} package"
 
-	echo "Project Path: ${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}"
-	ls "${TRAVIS_BUILD_DIR}}"
+	echo "Project Path: ${TRAVIS_BUILD_DIR}"
+	ls "${TRAVIS_BUILD_DIR}"
 	
 	
      ${UNITY_PATH} \
@@ -59,7 +58,7 @@ buildPackage() {
          -silent-crashes \
 		 -stackTraceLogType "Script Only" \
          -logFile "${TRAVIS_BUILD_DIR}/unity.build.package.log" \
-         -projectPath "${TRAVIS_BUILD_DIR}}" \
+         -projectPath "${TRAVIS_BUILD_DIR}" \
          -executeMethod DebugOnlyPackageBuilder.Build \
          -quit
 

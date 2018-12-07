@@ -21,6 +21,7 @@ before_install:
 
 #Install Unity
 install:
+- ls "${TRAVIS_BUILD_DIR}"
 - ./TravisCI/install.sh
 
 #Run the build script
@@ -36,7 +37,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key: "${GITHUB_OAUTH_TOKEN}"
-  file: "${BUILD_PATH}/package.unitypackage"
+  file: "${TRAVIS_BUILD_DIR}/package.unitypackage"
   skip_cleanup: true
   on:
     tags: true
@@ -45,5 +46,4 @@ env:
   global:
   - UNITY_NOPROXY="localhost,127.0.0.1"
   - UNITY_DOWNLOAD_CACHE="${TRAVIS_BUILD_DIR}/unity_download_cache"
-  - UNITY_PROJECT_NAME="UnityProject"
   - BUILD_PATH="${TRAVIS_BUILD_DIR}"
