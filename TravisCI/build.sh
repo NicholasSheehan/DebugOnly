@@ -51,7 +51,7 @@ buildPackage() {
     echo "Building ${UNITY_PROJECT_NAME} package"
 
 	echo "Project Path: ${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}"
-	ls "${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}"
+	ls "${TRAVIS_BUILD_DIR}/}"
 	
 	
      ${UNITY_PATH} \
@@ -59,7 +59,7 @@ buildPackage() {
          -silent-crashes \
 		 -stackTraceLogType "Script Only" \
          -logFile "${TRAVIS_BUILD_DIR}/unity.build.package.log" \
-         -projectPath "${TRAVIS_BUILD_DIR}/${UNITY_PROJECT_NAME}" \
+         -projectPath "${TRAVIS_BUILD_DIR}/}" \
          -executeMethod DebugOnlyPackageBuilder.Build \
          -quit
 
