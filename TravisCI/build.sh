@@ -8,15 +8,12 @@ activateLicense() {
     echo "Activate Unity"
 
     ${UNITY_PATH} \
-        -logFile "${TRAVIS_BUILD_DIR}/unity.activation.log" \
         -serial ${UNITY_SERIAL} \
         -username ${UNITY_USER} \
         -password ${UNITY_PWD} \
         -batchmode \
         -noUpm \
         -quit
-    echo "Unity activation log"
-    cat "${TRAVIS_BUILD_DIR}/unity.activation.log"
 }
 
  # prepareBuilds() {
@@ -47,13 +44,10 @@ activateLicense() {
 # }
 
 buildPackage() {
-    echo "Building ${TRAVIS_BUILD_DIR} package"
-
 	echo "Project Path: ${TRAVIS_BUILD_DIR}"
 	ls "${TRAVIS_BUILD_DIR}"
 	
-	
-     ${UNITY_PATH} \
+	${UNITY_PATH} \
          -batchmode \
          -silent-crashes \
 		 -stackTraceLogType "Script Only" \
@@ -74,11 +68,9 @@ returnLicense() {
     echo "Return license"
 
     ${UNITY_PATH} \
-        -logFile "${TRAVIS_BUILD_DIR}/unity.returnlicense.log" \
         -batchmode \
         -returnlicense \
         -quit
-    cat "$(pwd)/unity.returnlicense.log"
 }
 
 echo "${TRAVIS_BUILD_DIR} Contents:"
@@ -89,6 +81,9 @@ activateLicense
 #buildiOS
 buildPackage
 returnLicense
+
+echo "${TRAVIS_BUILD_DIR} Contents:"
+ls "${TRAVIS_BUILD_DIR}"
 
 echo ""
 echo "${TRAVIS_BUILD_DIR}/Assets Contents:"

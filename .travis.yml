@@ -15,13 +15,13 @@ cache:
 #Called before the install phase
 #Mark the scripts executable
 before_install:
+- ls ${TRAVIS_BUILD_DIR}
 - chmod -R a+rw ./unity_download_cache
 - chmod a+x ./TravisCI/install.sh
 - chmod a+x ./TravisCI/build.sh
 
 #Install Unity
 install:
-- ls "${TRAVIS_BUILD_DIR}"
 - ./TravisCI/install.sh
 
 #Run the build script
