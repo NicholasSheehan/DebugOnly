@@ -36,7 +36,7 @@ deploy:
     target_commitish: $TRAVIS_COMMIT
     tag_name: $TRAVIS_TAG
     
-    name: "$TRAVIS_TAG Release"
+    name: "$TRAVIS_TAG"
     body: "$TRAVIS_TAG Automated release from Travis CI"
     
     file: "${TRAVIS_BUILD_DIR}/DebugOnly.unitypackage"
