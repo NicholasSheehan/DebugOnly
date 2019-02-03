@@ -1,4 +1,5 @@
-﻿using UnityEditor.Build;
+﻿using UnityEditor;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +19,8 @@ public class DebugOnlyProcessor : IProcessScene
     /// <summary>
     /// Order in which the OnProcessScene methods should be run
     /// </summary>
-    public int callbackOrder {
+    public int callbackOrder
+    {
         get { return 0; }
     }
 
@@ -33,7 +35,9 @@ public class DebugOnlyProcessor : IProcessScene
     public void OnProcessScene(Scene scene)
 #endif
     {
-#if !DEBUG //Release
+        //Check if the "Development Build" checkbox is checked, if it is then return
+        if (Debug.isDebugBuild) return;
+
         var sceneRootObjects = scene.GetRootGameObjects();
 
         foreach (var rootObject in sceneRootObjects)
@@ -45,6 +49,5 @@ public class DebugOnlyProcessor : IProcessScene
                 if (child.CompareTag(debugOnlyTag)) Object.DestroyImmediate(child.gameObject);
             }
         }
-#endif //End Release
     }
 }
